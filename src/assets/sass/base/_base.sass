@@ -1,0 +1,116 @@
+// #Base
+   -------------------------------------------------------------------------- */
+// /**
+//  * Baseレイヤーにはプロジェクトにおける、基本的なベーススタイルを定義します。
+//  * 要素セレクタや属性セレクタなど、詳細度はできるかぎり低く保っておきます。
+//  * 基本的にclass属性は使用しません。
+//  */
+// /**
+//  * `padding`と`border`を`width`に含めます。
+//  * https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+//  */
+html
+  box-sizing: border-box
+
+*,
+*:before,
+*:after
+  box-sizing: inherit
+
+html
+  font-size: 16px
+  line-height: 1
+
+
+body
+  color: #000
+  font-family: $font-family-sans-serif-1
+  font-weight: 400
+  /* アンチエイリアスを指定する */
+  -webkit-font-smoothing: subpixel-antialiased
+  -moz-osx-font-smoothing: auto
+  /* メトリクスカーニングを指定する */
+  font-kerning: normal
+  background-color: #fff
+
+
+h1, h2, h3, h4, h5, h6
+  font-family: inherit
+  font-weight: 800
+  line-height: 1
+  color: inherit
+
+// h1
+// h2 {}
+// h3 {}
+// h4 {}
+// h5 {}
+// h6 {}
+
+
+// ネストされたリストのマージンをリセットします。
+li
+  > ul, > ol
+    margin-bottom: 0
+
+// `dt`と`dd`の左端を揃えます。
+dd
+  margin-left: 0
+
+table
+  width: 100%
+
+th
+  text-align: left
+
+
+
+
+// フルードイメージにします。
+img
+  max-width: 100%
+  height: auto
+  vertical-align: middle
+
+
+// IEでSVGがフルードイメージにならない不具合があります。
+// 属性値が`.svg`で終わる要素に適応します。
+[src$=".svg"],
+[data$=".svg"]
+  width: 100%
+
+// 日本語では斜体を使用しないためリセットします。
+i,
+cite,
+em,
+address,
+dfn
+  font-style: normal
+
+code,
+pre
+  font-family: Consolas, Menlo, Courier, monospace
+
+code
+  padding: 0.2em
+  // border-radius: $radius;
+  // font-size: $font-size--small;
+  background-color: rgba(0,0,0,0.06)
+
+pre code
+  padding: 0
+  // font-size: $font-size--small;
+  background-color: inherit
+
+h1, h2, h3, h4, h5, h6,
+ul, ol, dl,
+blockquote, p, address,
+hr,
+table,
+fieldset, figure,
+pre
+  margin-top: 0
+  margin-bottom: 0
+
+ul,li,dl,dt,dd
+  padding: 0
