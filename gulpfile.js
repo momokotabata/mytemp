@@ -47,14 +47,14 @@ gulp.task('sass', () => {
       .pipe(csslint()) // 構文チェック
       .pipe(csscomb()) // gulp-csscombでcssを整形
       .pipe(minifyCss({ keepSpecialComments: 1, processImport: false })) // minifyをする
-      .pipe(gulp.dest('./dist/assets/css'))
+      .pipe(gulp.dest('./dest/assets/css'))
       .pipe(browserSync.stream());
 });
 
 gulp.task('img',function(){
   gulp.src('./src/img/*.jpg')
     .pipe(imagemin())
-    .pipe(gulp.dest('./dist/img'));
+    .pipe(gulp.dest('./dest/img'));
 });
 
 gulp.task('default',['html','img']);
@@ -69,7 +69,7 @@ gulp.task('browserSync', () => {
   browserSync.init({
     browser: 'Google Chrome',
     server: {
-      baseDir: 'dist/'
+      baseDir: 'dest/'
     },
     notify: false,
     ghostMode: false
