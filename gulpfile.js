@@ -22,7 +22,7 @@ var mergeMediaQueries = require('gulp-merge-media-queries');
 
 gulp.task('html',function(){
   gulp.src('./src/**/index.html')
-    .pipe(gulp.dest('./dist'))
+    .pipe(gulp.dest('./dest'))
     .pipe(browserSync.stream());
 });
 
