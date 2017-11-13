@@ -1,5 +1,4 @@
 // src -> dist
-
 var gulp = require('gulp');
 var imagemin = require('gulp-imagemin');
 var watch = require('gulp-watch');
@@ -51,6 +50,10 @@ gulp.task('sass', () => {
       .pipe(browserSync.stream());
 });
 
+/*------------------------------------------------------------
+ イメージ圧縮
+ --イメージ画像を圧縮する。
+------------------------------------------------------------*/
 gulp.task('img',function(){
   gulp.src('./src/img/*.jpg')
     .pipe(imagemin())
@@ -58,7 +61,6 @@ gulp.task('img',function(){
 });
 
 gulp.task('default',['html','img']);
-
 
 /*------------------------------------------------------------
  オートリロード
