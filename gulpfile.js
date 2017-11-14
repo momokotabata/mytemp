@@ -21,7 +21,7 @@ var mergeMediaQueries = require('gulp-merge-media-queries');
 
 gulp.task('html',function(){
   gulp.src('./src/**/index.html')
-    .pipe(gulp.dest('./dest'))
+    .pipe(gulp.dest('./dist'))
     .pipe(browserSync.stream());
 });
 
@@ -46,7 +46,7 @@ gulp.task('sass', () => {
       .pipe(csslint()) // 構文チェック
       .pipe(csscomb()) // gulp-csscombでcssを整形
       .pipe(minifyCss({ keepSpecialComments: 1, processImport: false })) // minifyをする
-      .pipe(gulp.dest('./dest/assets/css'))
+      .pipe(gulp.dest('./dist/assets/css'))
       .pipe(browserSync.stream());
 });
 
@@ -57,7 +57,7 @@ gulp.task('sass', () => {
 gulp.task('img',function(){
   gulp.src('./src/img/*.jpg')
     .pipe(imagemin())
-    .pipe(gulp.dest('./dest/img'));
+    .pipe(gulp.dest('./dist/img'));
 });
 
 gulp.task('default',['html','img']);
@@ -71,7 +71,7 @@ gulp.task('browserSync', () => {
   browserSync.init({
     browser: 'Google Chrome',
     server: {
-      baseDir: 'dest/'
+      baseDir: 'dist/'
     },
     notify: false,
     ghostMode: false
