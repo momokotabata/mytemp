@@ -1,0 +1,15 @@
+extends /layouts/_layout
+
+block vars
+  - page = "index"
+  - url = "/"
+  - title = "トップ"
+  - desciption = ""
+
+block page
+  include /partials/_header
+  .l-contents
+    img(src="/orz/assets/images/pc/dummyImg.png", alt="dummyImg")
+    p.hoge aaaaa
+  include /partials/_footer
+  include /partials/_background

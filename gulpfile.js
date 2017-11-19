@@ -1,6 +1,7 @@
-// src -> dist
+// src -> dest
 var gulp = require('gulp');
 var imagemin = require('gulp-imagemin');
+var imageminPngquant = require('imagemin-pngquant');
 var watch = require('gulp-watch');
 var browserSync = require('browser-sync').create();
 var runSequence = require('run-sequence');
@@ -12,19 +13,43 @@ var csslint = require('gulp-csslint');
 var minifyCss = require('gulp-minify-css');
 var notify = require('gulp-notify');
 var mergeMediaQueries = require('gulp-merge-media-queries');
-
-// 指定の仕方
-// gulp.src('./src/index.html')
-// gulp.src(['./src/index.html','./src/main.html'])
-// gulp.src('./src/*.html')
-// gulp.src('./src/**/*.html')
-// gulp.src(['./src/**/*.html','!./src/donotcopy.html'])
+var pug = require('gulp-pug');
 
 gulp.task('html',function(){
   gulp.src('./src/**/index.html')
     .pipe(gulp.dest('./dist'))
     .pipe(browserSync.stream());
 });
+
+/*------------------------------------------------------------
+ PUGのコンパイル
+------------------------------------------------------------*/
+// gulp.task('pug', () => {
+//   return gulp.src([PUG_SRC + '**/*.pug', '!' + PUG_SRC + '**/_*.pug'])
+//     .pipe(plumber()).pipe(pug({
+//       basedir: PUG_SRC
+//     }))
+//     .pipe(gulp.dest(PUG_DEST))
+//     .pipe(browserSync.stream());
+// });
+
+gulp.task('pug', () => {
+    //pugフォルダ以下の.pugファイルを対象とし、
+    //pugフォルダ以下の_から始まるファイルは除外する
+    //pug以下のフォルダ構成をそのまま出力先にも適用
+    gulp.src(['./pug/**/*.pug', '!./pug/**/_*.pug'],{ base: './pug' })
+        .pipe(pug({
+            pretty: true//読みやすい形で出力
+        }))
+        //htmlフォルダに出力
+        .pipe(gulp.dest('./html/'));
+});
+
+//自動化
+//pugフォルダ以下のpugファイルが更新されたらpugタスクを実行する
+gulp.task('autoBuild', ['pug'], function() {
+    gulp.watch(['./pug/**/*.pug'], ['pug']);
+})
 
 /*------------------------------------------------------------
  SASSのコンパイル
@@ -56,9 +81,9 @@ gulp.task('sass', () => {
  --イメージ画像を圧縮する。
 ------------------------------------------------------------*/
 gulp.task('img',function(){
-  gulp.src('./src/img/*.jpg')
+  gulp.src('./src/assets/images/pc/top/*.jpg')
     .pipe(imagemin())
-    .pipe(gulp.dest('./dist/img'));
+    .pipe(gulp.dest('./dist/assets/images/pc/top'));
 });
 
 gulp.task('default',['html','img']);
