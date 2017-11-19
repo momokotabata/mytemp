@@ -13,6 +13,7 @@ var minifyCss = require('gulp-minify-css');
 var notify = require('gulp-notify');
 var mergeMediaQueries = require('gulp-merge-media-queries');
 
+// 指定の仕方
 // gulp.src('./src/index.html')
 // gulp.src(['./src/index.html','./src/main.html'])
 // gulp.src('./src/*.html')
